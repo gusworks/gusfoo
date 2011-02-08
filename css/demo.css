@@ -38,3 +38,8 @@ body {
 #grid2 .gusfoo_soft_box {
   border-color: #ff8f8f;
 }
+
+.gusfoo th {
+  font-weight: bold;
+  font-size       : 13px;
+}
