@@ -1,0 +1,24 @@
+body {
+  background-color: white;
+  color           : #5050ff;
+  font-family     : arial, helvetica;
+  font-size       : 12px;
+}
+
+.gusfoo {
+  padding: 5px;
+  width: 800px;
+  border-radius: 5px;
+  border: solid 1px #7f7f7f;
+  background-color: #efefef;
+}
+
+#grid1 {
+  background-color: #efefff;
+  border-color: #7f7fff;
+}
+
+#grid2 {
+  background-color: #ffefef;
+  border-color: #ff7f7f;
+}

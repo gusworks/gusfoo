@@ -3,14 +3,22 @@
     <title>jQuery Gusfoo plugin</title>
     <script type="text/javascript" src="../js/jquery-1.5.min.js"></script>
     <script type="text/javascript" src="../js/jquery.gusfoo.js"></script>
+
+    <link href="../css/demo.css" media="screen" rel="stylesheet" type="text/css"/> 
   </head>
   <body>
     <script type="text/javascript">
       $(function(){
-          $('#grid').gusfoo();
-          });
+          $('#grid1').gusfoo();
+          $('#grid2').gusfoo({
+              startMonth: '2009-02',
+              finalMonth: '2012-11'
+            });
+      });
     </script>
-    <p>Simple demo within a specific year</p>
-    <div id="grid"></div>
+    <h1>Simple demo within a specific year</h3>
+    <div id="grid1"></div>
+    <h1>Simple demo with multiple years</h3>
+    <div id="grid2"></div>
   </body>
 </html>
