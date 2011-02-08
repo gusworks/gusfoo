@@ -5,6 +5,8 @@
     var finalDate;
     var startYear;
     var finalYear;
+    var startMonth;
+    var finalMonth;
     var containerId;
 
     var settings = {
@@ -13,7 +15,14 @@
       'singleYearCaption'   : 'Clique no valor que deseja alterar: ',
       'multipleYearCaption' : 'Selecione o ano e clique no valor que deseja alterar: ',
       'yearText'            : 'Ano: ',
-      'months'              : ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+      'months'              : ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      'rows'                : [{'title': 'Row 1',
+                                'class': 'money',
+                                'id'   : 'row1'
+                              }, {'title': 'Row 2',
+                                'class': 'date',
+                                'id'   : 'row2'
+                              }]
     };
 
     var methods = {
@@ -32,6 +41,9 @@
         startYear = startDate.getFullYear();
         finalYear = finalDate.getFullYear();
 
+        startMonth = startDate.getMonth();
+        finalMonth = finalDate.getMonth();
+
         containerId = this.attr('id');
 
         this.html(draw());
@@ -46,8 +58,6 @@
 
     function draw(){
       var html = '<p><i>';
-      var startYear = startDate.getFullYear();
-      var finalYear = finalDate.getFullYear();
 
       if(startYear == finalYear){
         html += settings['singleYearCaption'] + '</i>';
@@ -68,9 +78,42 @@
         for(var month = 0; month < 12; month++){
           html += '<th class">' + settings['months'][month] + '</th>';
         }
-        html += '</tr>';
+        html += '</tr><tr><td><b><small>';
+        var rowsLength = settings['rows'].length;
+        for(var rows = 0; rows < rowsLength; rows++){
+          html += settings['rows'][rows]['title'] + (rows == (rowsLength - 1) ? '' : '<br />');
+        }
+        for(var month = 0; month < 12; month++){
+          html += '<td>';
+          if (startYear == finalYear) {
+            if (month >= startMonth && month <= finalMonth) {
+              html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">foo</div>';
+            } else {
+              html += '<div class="empty_cell">&nbsp;</div>';
+            } 
+          } else if (year == startYear) {
+            if (month >= startMonth) {
+              html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">foo</div>';
+            } else {
+              html += '<div class="empty_cell">&nbsp;</div>';
+            }
+          } else if (year == finalYear) {
+              if (month <= finalMonth) {
+                html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">foo</div>';
+              } else {
+                html += '<div class="empty_cell">&nbsp;</div>';
+              }
+          } else {
+            html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">foo</div>';
+          }
+          html += '</td>';
+        }
+        html += '</small></b></td></tr>';
         html += '</tbody></table></div>';
       }
+
+      console.log(settings);
+
       return html;
     }
 
