@@ -15,14 +15,27 @@
       'singleYearCaption'   : 'Clique no valor que deseja alterar: ',
       'multipleYearCaption' : 'Selecione o ano e clique no valor que deseja alterar: ',
       'yearText'            : 'Ano: ',
-      'months'              : ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      'shortMonths'         : ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      'fullMonths'          : ['Janeiro', 
+                                'Fevereiro', 
+                                'Março', 
+                                'Abril', 
+                                'Maio', 
+                                'Junho', 
+                                'Julho', 
+                                'Agosto', 
+                                'Setembro', 
+                                'Outubro', 
+                                'Novembro', 
+                                'Dezembro'],
       'rows'                : [{'title': 'Row 1',
                                 'class': 'money',
                                 'id'   : 'row1'
                               }, {'title': 'Row 2',
                                 'class': 'date',
                                 'id'   : 'row2'
-                              }]
+                              }],
+      'values'              : []
     };
 
     var methods = {
@@ -76,7 +89,7 @@
         html += '<div class="gusfoo_soft_box" id="' + containerId + '_year_' + year + '"><b>' + settings['yearText']  + year + '</b><table border="0">';
         html += '<tbody><tr><th></th>';
         for(var month = 0; month < 12; month++){
-          html += '<th class">' + settings['months'][month] + '</th>';
+          html += '<th class">' + settings['shortMonths'][month] + '</th>';
         }
         html += '</tr><tr><td><b><small>';
         var rowsLength = settings['rows'].length;
