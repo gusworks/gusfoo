@@ -100,7 +100,10 @@
           html += '<td>';
           if (startYear == finalYear) {
             if (month >= startMonth && month <= finalMonth) {
-              html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">foo</div>';
+              html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">';
+              for(var rows = 0; rows < rowsLength; rows++){
+              }
+              html += '</div>';
             } else {
               html += '<div class="empty_cell">&nbsp;</div>';
             } 
