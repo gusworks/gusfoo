@@ -1,6 +1,5 @@
 (function( $ ){
   $.fn.gusfoo = function(method) {
-
     var startDate;
     var finalDate;
     var startYear;
@@ -37,6 +36,10 @@
                                "row2" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}},
       'cellClick'           : function(cellId, month, year, values){}
     };
+
+    function xuuu(){
+      console.log("xuuuuu");
+    }
 
     var methods = {
       init   : function(options) {
