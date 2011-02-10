@@ -29,19 +29,19 @@
                                 'Novembro', 
                                 'Dezembro'],
       'rows'                : [{'title': 'Row 1',
-                                'class': 'money',
                                 'id'   : 'row1'
                               }, {'title': 'Row 2',
-                                'class': 'date',
                                 'id'   : 'row2'
                               }],
-      'values'              : []
+      'data'                : {"row1" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+                               "row2" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}},
+      'cellClick'           : function(){console.log('no click')}
     };
 
     var methods = {
       init   : function(options) {
-      console.log('----');
-      if(options){
+        console.log('----');
+        if(options){
           $.extend(settings, options);
         };
 
@@ -65,7 +65,16 @@
         var select = $('#' + containerId + '_select');
         select.change(onSelectChange);
 
+        console.log('#' + containerId + ' .editable_cell');
+        $('#' + containerId + ' * .editable_cell').bind('click.gusfoo', onCellClick);
+
         select.trigger('change');
+      },
+      data: function(data) {
+        if(typeof data == 'object'){
+          settings['data'] = data;
+        }
+        return settings['data'];
       }
     }
 
@@ -76,7 +85,7 @@
         html += settings['singleYearCaption'] + '</i>';
       } else {
         html += settings['multipleYearCaption'] + '</i>';
-        html += '<select  id="' + containerId + '_select">';
+        html += '<select id="' + containerId + '_select">';
         for(var year = startYear; year <= finalYear; year++){
           html += '<option value="' + year + '">' + year + '</option>';
         }
@@ -128,8 +137,6 @@
         html += '</tbody></table></div>';
       }
 
-      console.log(settings);
-
       return html;
     }
 
@@ -141,6 +148,11 @@
           $('#' + containerId + '_year_' + year).hide();
         };
       };
+    }
+
+    function onCellClick(){
+      console.log(this);
+      (settings['cellClick'])(1, 2);
     }
 
     // Method calling logic

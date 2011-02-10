@@ -17,16 +17,17 @@
               rows: [{'title': 'Estimado',
                       'id'   : 'estimado'},
                      {'title': 'Realizado',
-                     'id'   : 'realizado'}
-                     ],
+                     'id'   : 'realizado'}],
               data:{"estimado": {"2009":[null,101,2,3,4,5,6,7,8,9,10,11],
                                  "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
                                  "2011":[0,1,2,3,4,5,6,7,8,9,10,null]},
                     "realizado":{"2009":[null,101,2,3,4,5,6,7,8,9,10,11],
                                  "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
-                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]}}
-            });
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]}},
+                    "cellClick": function(){console.log('new click')}
+          });
       });
+
     </script>
     <h1>Simple demo within a specific year</h3>
     <div id="grid1"></div>
