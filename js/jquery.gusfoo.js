@@ -35,12 +35,11 @@
                               }],
       'data'                : {"row1" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
                                "row2" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}},
-      'cellClick'           : function(){console.log('no click')}
+      'cellClick'           : function(cellId, month, year, values){}
     };
 
     var methods = {
       init   : function(options) {
-        console.log('----');
         if(options){
           $.extend(settings, options);
         };
@@ -65,10 +64,11 @@
         var select = $('#' + containerId + '_select');
         select.change(onSelectChange);
 
-        console.log('#' + containerId + ' .editable_cell');
         $('#' + containerId + ' * .editable_cell').bind('click.gusfoo', onCellClick);
 
         select.trigger('change');
+
+        return $(this);
       },
       data: function(data) {
         if(typeof data == 'object'){
@@ -151,8 +151,17 @@
     }
 
     function onCellClick(){
-      console.log(this);
-      (settings['cellClick'])(1, 2);
+      var cellId = this.id;
+      var cellSplit = cellId.split('_');
+      var data = settings['data'];
+      var values = {};
+      console.log(cellId, cellSplit, data);
+      for(var item in data){
+        console.log(item);
+        values[item] = data[item][cellSplit[2]][cellSplit[3]];
+      }
+      console.log(values);
+      (settings['cellClick'])(cellId, cellSplit[3], cellSplit[2], values);
     }
 
     // Method calling logic
