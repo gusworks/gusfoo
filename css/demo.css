@@ -1,8 +1,8 @@
 body {
   background-color: white;
   color           : #5050ff;
-  font-family     : arial, helvetica;
-  font-size       : 12px;
+  font-family     : verdana, arial, helvetica;
+  font-size       : 13px;
 }
 
 .gusfoo {
@@ -13,12 +13,28 @@ body {
   background-color: #efefef;
 }
 
+.gusfoo_soft_box {
+  background-color: #fefefe;
+  padding: 3px;
+  border: solid 1px;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
 #grid1 {
   background-color: #efefff;
   border-color: #7f7fff;
 }
 
+#grid1 .gusfoo_soft_box {
+  border-color: #8f8fff;
+}
+
 #grid2 {
   background-color: #ffefef;
   border-color: #ff7f7f;
+}
+
+#grid2 .gusfoo_soft_box {
+  border-color: #ff8f8f;
 }

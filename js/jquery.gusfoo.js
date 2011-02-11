@@ -3,12 +3,16 @@
 
     var startDate;
     var finalDate;
+    var startYear;
+    var finalYear;
+    var containerId;
 
     var settings = {
       'startMonth'          : '2011-01',
       'finalMonth'          : '2011-12',
-      'singleYearCaption'   : 'Enter the text here: ',
-      'multipleYearCaption' : 'Select the year and enter the text here: '
+      'singleYearCaption'   : 'Clique no valor que deseja alterar: ',
+      'multipleYearCaption' : 'Selecione o ano e clique no valor que deseja alterar: ',
+      'yearText'            : 'Ano: '
     };
 
     var methods = {
@@ -24,33 +28,57 @@
         startDate = new Date(startSplit[0], startSplit[1] - 1, 1);
         finalDate = new Date(finalSplit[0], finalSplit[1] - 1, 1);
 
+        startYear = startDate.getFullYear();
+        finalYear = finalDate.getFullYear();
+
+        containerId = this.attr('id');
+
         this.html(draw());
         this.addClass('gusfoo');
 
-        console.log(this);
-        console.log(startDate);
-        console.log(finalDate);
-        console.log(settings);
+        var select = $('#' + containerId + '_select');
+        select.change(onSelectChange);
+
+        select.trigger('change');
       }
     }
 
     function draw(){
-      var html = '<p><b>';
+      var html = '<p><i>';
       var startYear = startDate.getFullYear();
       var finalYear = finalDate.getFullYear();
 
       if(startYear == finalYear){
-        html += settings['singleYearCaption'];
+        html += settings['singleYearCaption'] + '</i>';
       } else {
-        html += settings['multipleYearCaption'];
-        html += '<select id="gusfooYear">';
+        html += settings['multipleYearCaption'] + '</i>';
+        html += '<select  id="' + containerId + '_select">';
         for(var year = startYear; year <= finalYear; year++){
           html += '<option value="' + year + '">' + year + '</option>';
         }
         html += '</select>';
+        html += '';
       }
-      html += '</b></p>';
+      html += '</p>';
+
+      for(var year = startYear; year <= finalYear; year++){
+        html += '<div class="gusfoo_soft_box" id="' + containerId + '_year_' + year + '">boo_' + year;
+        html += '</div>';
+      }
       return html;
+    }
+
+    function onSelectChange(){
+      console.log('changed to ' + $(this).attr('value'));
+      for(var year = startYear; year <= finalYear; year++){
+        console.log(year + ': ' + ($(this).attr('value') == year));
+        console.log(containerId + '_year_' + year);
+        if($(this).attr('value') == year){
+          $('#' + containerId + '_year_' + year).show();
+        } else {
+          $('#' + containerId + '_year_' + year).hide();
+        };
+      };
     }
 
     // Method calling logic
