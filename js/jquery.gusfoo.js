@@ -34,12 +34,8 @@
                               }],
       'data'                : {"row1" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
                                "row2" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}},
-      'cellClick'           : function(cellId, month, year, values){}
+      'editForm'            : $('')
     };
-
-    function xuuu(){
-      console.log("xuuuuu");
-    }
 
     var methods = {
       init   : function(options) {
@@ -68,6 +64,8 @@
         select.change(onSelectChange);
 
         $('#' + containerId + ' * .editable_cell').bind('click.gusfoo', onCellClick);
+
+        settings['editForm'].hide();
 
         select.trigger('change');
 
@@ -158,13 +156,15 @@
       var cellSplit = cellId.split('_');
       var data = settings['data'];
       var values = {};
-      console.log(cellId, cellSplit, data);
+
       for(var item in data){
-        console.log(item);
         values[item] = data[item][cellSplit[2]][cellSplit[3]];
       }
-      console.log(values);
-      (settings['cellClick'])(cellId, cellSplit[3], cellSplit[2], values);
+
+      var div = $(settings['editForm']);
+      console.log(div);
+      console.log($.fn.blockUI);
+      div.dialog('open');
     }
 
     // Method calling logic
