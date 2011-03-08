@@ -1,4 +1,7 @@
-(function( $ ){
+// damned IE
+if(typeof console=='undefined'){console=new function(){this.log=function(message){}}}
+
+(function($){
   $.fn.gusfoo = function(method) {
     var startDate;
     var finalDate;
@@ -130,7 +133,7 @@
                 html += '<div class="empty_cell">&nbsp;</div>';
               }
           } else {
-            html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">foo</div>';
+            html += '<a class="link-iefix"><div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">foo</div></a>';
           }
           html += '</td>';
         }
@@ -163,8 +166,6 @@
 
       var div = $(settings['editForm']);
       console.log(div);
-      console.log($.fn.blockUI);
-      div.dialog('open');
     }
 
     // Method calling logic
