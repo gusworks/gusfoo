@@ -109,12 +109,16 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
         for(var rows = 0; rows < rowsLength; rows++){
           html += settings['rows'][rows]['title'] + (rows == (rowsLength - 1) ? '' : '<br />');
         }
+        var valueYear;
         for(var month = 0; month < 12; month++){
           html += '<td>';
           if (startYear == finalYear) {
             if (month >= startMonth && month <= finalMonth) {
               html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">';
               for(var rows = 0; rows < rowsLength; rows++){
+                valueYear = settings['data'][settings['rows'][rows]['id']][year];
+                html += (typeof valueYear == 'undefined' ? 0 : valueYear[month]);
+                html += (rows != (rowsLength - 1) ? "<br />" : "");
               }
               html += '</div>';
             } else {
@@ -122,18 +126,35 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
             } 
           } else if (year == startYear) {
             if (month >= startMonth) {
-              html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">foo</div>';
+              html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">';
+              for(var rows = 0; rows < rowsLength; rows++){
+                valueYear = settings['data'][settings['rows'][rows]['id']][year];
+                html += (typeof valueYear == 'undefined' ? 0 : valueYear[month]);
+                html += (rows != (rowsLength - 1) ? "<br />" : "");
+              }
+              html += '</div>';
             } else {
               html += '<div class="empty_cell">&nbsp;</div>';
             }
           } else if (year == finalYear) {
-              if (month <= finalMonth) {
-                html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">foo</div>';
-              } else {
-                html += '<div class="empty_cell">&nbsp;</div>';
+            if (month <= finalMonth) {
+              html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">';
+              for(var rows = 0; rows < rowsLength; rows++){
+                valueYear = settings['data'][settings['rows'][rows]['id']][year];
+                html += (typeof valueYear == 'undefined' ? 0 : valueYear[month]);
+                html += (rows != (rowsLength - 1) ? "<br />" : "");
               }
+              html += '</div>';
+            } else {
+              html += '<div class="empty_cell">&nbsp;</div>';
+            }
           } else {
-            html += '<a class="link-iefix"><div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">foo</div></a>';
+            html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">';
+            for(var rows = 0; rows < rowsLength; rows++){
+              html += settings['data'][settings['rows'][rows]['id']][year][month];
+              html += (rows != (rowsLength - 1) ? "<br />" : "");
+            }
+            html += '</div>';
           }
           html += '</td>';
         }
