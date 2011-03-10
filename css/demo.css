@@ -120,3 +120,19 @@ body {
   -webkit-box-shadow: 7px 7px 14px rgba(0, 0, 0, 0.7);
   box-shadow: 7px 7px 14px rgba(0, 0, 0, 0.7);
 }
+
+select, input {
+  border: 1px solid #e0e0e0;
+  font-family: verdana, arial, helvetica;
+  font-size: 12px;
+}
+
+input {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+select:hover, input:hover {
+  background-color: #efefef;
+}

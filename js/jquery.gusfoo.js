@@ -112,7 +112,7 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
         html += '</tr><tr><td><b><small>';
         var rowsLength = settings['rows'].length;
         for(var rows = 0; rows < rowsLength; rows++){
-          html += settings['rows'][rows]['title'] + (rows == (rowsLength - 1) ? '' : '<br />');
+          html += settings['rows'][rows]['title'] + (rows == (rowsLength - 1) ? '' : '<br/>');
         }
         var valueYear;
         for(var month = 0; month < 12; month++){
@@ -123,7 +123,7 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
               for(var rows = 0; rows < rowsLength; rows++){
                 valueYear = settings['data'][settings['rows'][rows]['id']][year];
                 html += (typeof valueYear == 'undefined' ? 0 : valueYear[month]);
-                html += (rows != (rowsLength - 1) ? "<br />" : "");
+                html += (rows != (rowsLength - 1) ? "<br/>" : "");
               }
               html += '</div>';
             } else {
@@ -135,7 +135,7 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
               for(var rows = 0; rows < rowsLength; rows++){
                 valueYear = settings['data'][settings['rows'][rows]['id']][year];
                 html += (typeof valueYear == 'undefined' ? 0 : valueYear[month]);
-                html += (rows != (rowsLength - 1) ? "<br />" : "");
+                html += (rows != (rowsLength - 1) ? "<br/>" : "");
               }
               html += '</div>';
             } else {
@@ -147,7 +147,7 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
               for(var rows = 0; rows < rowsLength; rows++){
                 valueYear = settings['data'][settings['rows'][rows]['id']][year];
                 html += (typeof valueYear == 'undefined' ? 0 : valueYear[month]);
-                html += (rows != (rowsLength - 1) ? "<br />" : "");
+                html += (rows != (rowsLength - 1) ? "<br/>" : "");
               }
               html += '</div>';
             } else {
@@ -157,7 +157,7 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
             html += '<div class="editable_cell" id="' + containerId + '_cell_' + year + '_' + month + '">';
             for(var rows = 0; rows < rowsLength; rows++){
               html += settings['data'][settings['rows'][rows]['id']][year][month];
-              html += (rows != (rowsLength - 1) ? "<br />" : "");
+              html += (rows != (rowsLength - 1) ? "<br/>" : "");
             }
             html += '</div>';
           }
@@ -193,27 +193,36 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
       }
 
       editForm.empty();
-      editForm.html(drawDialog(cellId, data, values, okButton, cancelButton));
+      editForm.html(drawDialog(cellSplit, data, values, okButton, cancelButton));
 
       $('#' + cancelButton).click(function(){editForm.dialog('close')});
-      $('#' + okButton).click(function(){console.log(editForm.html())});
+      $('#' + okButton).click(function(){submitDialog(cellSplit)});
 
       editForm.dialog('open');
     }
 
-    function drawDialog(cellId, data, values, okButton, cancelButton){
-      console.log(cellId, data, values);
+    function drawDialog(cellSplit, data, values, okButton, cancelButton){
+      console.log(cellSplit, data, values);
       var html = '';
       var fields = settings['rows'];
 
       for(var i = 0; i < fields.length; i++){
         html += '<label for="' + fields[i]['id'] + '">' + fields[i]['title'] + ': </label>';
-        html += '<input type="text" id="' + fields[i]['id'] + '" class="' + fields[i]['class'] + '">';
-        html += '<br />';
+        html += '<input type="text" id="' + fields[i]['id'] + '" class="' + fields[i]['class'] + '" value="' + 0 + '">';
+        html += '<br/>';
       }
       html += '<p align="center"><input type="button" value="Confirmar" id="' + okButton + '"> <input type="button" value="Cancelar" id="' + cancelButton + '"></p>';
 
       return html;
+    }
+
+    function submitDialog(){
+      var fields = $(editForm).children('input');
+      for(var i = 0; i < fields.length; i++){
+        console.log($(fields[i]).attr('id') + ' - ' + $(fields[i]).attr('value'));
+      }
+      
+      // console.log(this);
     }
 
     // Method calling logic
