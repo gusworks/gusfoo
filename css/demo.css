@@ -1,14 +1,35 @@
 body {
-  background-color: white;
+  background-color: #c0c0c0;
   color           : #5050ff;
   font-family     : verdana, arial, helvetica;
   font-size       : 13px;
 }
 
+#container {
+  background-color: white;
+  margin: 0 auto;
+  width: 812px;
+  height: 450px;
+  padding: 5px;
+  border: 1px solid #a0a0a0;
+
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+
+  -moz-box-shadow: 7px 7px 14px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 7px 7px 14px rgba(0, 0, 0, 0.7);
+  box-shadow: 7px 7px 14px rgba(0, 0, 0, 0.7);
+}
+
 .gusfoo {
   padding: 5px;
   width: 800px;
+
   border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+
   border: solid 1px #7f7f7f;
   background-color: #efefef;
 }
@@ -71,9 +92,9 @@ body {
   -webkit-border-radius: 5px;
   border-radius: 5px;
 
-  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 
   border-top-left-radius: 5px 5px;
   border-top-right-radius: 5px 5px;
@@ -81,3 +102,21 @@ body {
   border-bottom-left-radius: 5px 5px;
 }
 
+#hidden {
+  width: 400px;
+  height: 300px;
+
+  background-color: #fefefe;
+
+  margin: 0 auto;
+}
+
+.ui-dialog {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+
+  -moz-box-shadow: 7px 7px 14px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 7px 7px 14px rgba(0, 0, 0, 0.7);
+  box-shadow: 7px 7px 14px rgba(0, 0, 0, 0.7);
+}

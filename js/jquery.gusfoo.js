@@ -10,6 +10,7 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
     var startMonth;
     var finalMonth;
     var containerId;
+    var editForm;
 
     var settings = {
       'startMonth'          : '2011-01',
@@ -68,9 +69,13 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
 
         $('#' + containerId + ' * .editable_cell').bind('click.gusfoo', onCellClick);
 
-        settings['editForm'].hide();
+        editForm = settings['editForm'];
+
+        editForm.hide();
 
         select.trigger('change');
+
+        editForm.dialog({autoOpen: false});
 
         return $(this);
       },
@@ -180,13 +185,35 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
       var cellSplit = cellId.split('_');
       var data = settings['data'];
       var values = {};
+      var okButton = cellId + '_ok';
+      var cancelButton = cellId + '_cancel';
 
       for(var item in data){
         values[item] = data[item][cellSplit[2]][cellSplit[3]];
       }
 
-      var div = $(settings['editForm']);
-      console.log(div);
+      editForm.empty();
+      editForm.html(drawDialog(cellId, data, values, okButton, cancelButton));
+
+      $('#' + cancelButton).click(function(){editForm.dialog('close')});
+      $('#' + okButton).click(function(){console.log(editForm.html())});
+
+      editForm.dialog('open');
+    }
+
+    function drawDialog(cellId, data, values, okButton, cancelButton){
+      console.log(cellId, data, values);
+      var html = '';
+      var fields = settings['rows'];
+
+      for(var i = 0; i < fields.length; i++){
+        html += '<label for="' + fields[i]['id'] + '">' + fields[i]['title'] + ': </label>';
+        html += '<input type="text" id="' + fields[i]['id'] + '" class="' + fields[i]['class'] + '">';
+        html += '<br />';
+      }
+      html += '<p align="center"><input type="button" value="Confirmar" id="' + okButton + '"> <input type="button" value="Cancelar" id="' + cancelButton + '"></p>';
+
+      return html;
     }
 
     // Method calling logic
