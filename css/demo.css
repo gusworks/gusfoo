@@ -136,3 +136,8 @@ input {
 select:hover, input:hover {
   background-color: #efefef;
 }
+
+#hidden label {
+  float: left;
+  width: 90px;
+}
