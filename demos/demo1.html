@@ -24,6 +24,20 @@
                                  "2011":[0,1,2,3,4,5,6,7,8,9,10,null]},
                     "realizado":{"2009":[null,200912,2,3,4,5,6,7,8,9,10,11],
                                  "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]}}
+          });
+          $('#grid3').gusfoo({
+              startMonth: '2009-02',
+              finalMonth: '2012-11',
+              rows: [{'title': 'Estimado',
+                      'id'   : 'estimado'},
+                     {'title': 'Realizado',
+                     'id'   : 'realizado'}],
+              data:{"estimado": {"2009":[null,200911,2,3,4,5,6,7,8,9,10,11],
+                                 "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]},
+                    "realizado":{"2009":[null,200912,2,3,4,5,6,7,8,9,10,11],
+                                 "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
                                  "2011":[0,1,2,3,4,5,6,7,8,9,10,null]}},
                     "editForm": $('#hidden')
             });
@@ -35,6 +49,12 @@
     <div id="grid1"></div>
     <h1>Simple demo with multiple years</h3>
     <div id="grid2"></div>
+    <h1>Simple demo with multiple years and edition</h3>
+    <div id="grid3"></div>
+    <h1>Simple demo with multiple years, edition and validation</h3>
+    <div id="grid4">Developing</div>
+    <h1>Simple demo with multiple years, edition, validation and a chart</h3>
+    <div id="grid5">Developing</div>
     <div id="hidden">boo</div>
   </div>
   </body>
