@@ -208,9 +208,16 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
 
       for(var i = 0; i < fields.length; i++){
         html += '<label for="' + fields[i]['id'] + '">' + fields[i]['title'] + ': </label>';
-        html += '<input type="text" id="' + fields[i]['id'] + '" class="' + fields[i]['class'] + '" value="' + 0 + '">';
+        html += '<input type="text" id="' + 
+          fields[i]['id'] + 
+          '" class="' + 
+          fields[i]['class'] + 
+          '" value="' + 
+          settings['data'][fields[i]['id']][cellSplit[2]][cellSplit[3]] + 
+          '">';
         html += '<br/>';
       }
+      html += '<input type="hidden" id="cell_date" value="' + cellSplit[2] + '-' + cellSplit[3] + '">';
       html += '<p align="center"><input type="button" value="Confirmar" id="' + okButton + '"> <input type="button" value="Cancelar" id="' + cancelButton + '"></p>';
 
       return html;
@@ -218,11 +225,13 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
 
     function submitDialog(){
       var fields = $(editForm).children('input');
-      for(var i = 0; i < fields.length; i++){
-        console.log($(fields[i]).attr('id') + ' - ' + $(fields[i]).attr('value'));
-      }
+      var dateSplit = $('#cell_date').attr('value').split('-');
       
-      // console.log(this);
+      console.log('----', dateSplit, settings['data']);
+      for(var i = 0; i < (fields.length - 1); i++){
+        var field_id = $(fields[i]).attr('id');
+        console.log(field_id + ' - ' + $(fields[i]).attr('value'), settings['data'][field_id][dateSplit[0]][dateSplit[1]]);
+      }
     }
 
     // Method calling logic
