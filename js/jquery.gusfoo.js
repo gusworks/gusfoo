@@ -226,12 +226,23 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
     function submitDialog(){
       var fields = $(editForm).children('input');
       var dateSplit = $('#cell_date').attr('value').split('-');
+      var cell = $('#' + containerId + '_cell_' + dateSplit[0] + '_' + dateSplit[1]);
       
-      console.log('----', dateSplit, settings['data']);
+      console.log('----', dateSplit, settings['data'], cell);
+      var cell_value = '';
+      
       for(var i = 0; i < (fields.length - 1); i++){
         var field_id = $(fields[i]).attr('id');
-        console.log(field_id + ' - ' + $(fields[i]).attr('value'), settings['data'][field_id][dateSplit[0]][dateSplit[1]]);
+        var field_value = $(fields[i]).attr('value');
+
+        settings['data'][field_id][dateSplit[0]][dateSplit[1]] = field_value;
+
+        cell_value += field_value + '<br/>';
       }
+      
+      cell.html(cell_value);
+      
+      $(editForm).dialog('close');
     }
 
     // Method calling logic
