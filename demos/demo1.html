@@ -4,8 +4,10 @@
     <script type="text/javascript" src="../js/jquery-1.5.min.js"></script>
     <script type="text/javascript" src="../js/jquery-ui-1.8.10.custom.min.js"></script>
     <script type="text/javascript" src="../js/jquery.gusfoo.js"></script>
+    <script type="text/javascript" src="../js/jquery.anythingslider.min.js"></script> 
 
     <link href="../css/jquery-ui-1.8.10.custom.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="../css/anythingslider.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="../css/demo.css" media="screen" rel="stylesheet" type="text/css"/> 
   </head>
   <body>
@@ -39,23 +41,57 @@
                     "realizado":{"2009":[null,200912,2,3,4,5,6,7,8,9,10,11],
                                  "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
                                  "2011":[0,1,2,3,4,5,6,7,8,9,10,null]}},
-                    "editForm": $('#hidden')
-            });
+              editForm: $('#hidden')
+          });
+          $('#grid4').gusfoo({
+              startMonth: '2009-02',
+              finalMonth: '2012-11',
+              rows: [{'title': 'Estimado',
+                      'id'   : 'estimado'},
+                     {'title': 'Realizado',
+                     'id'   : 'realizado'}],
+              data:{"estimado": {"2009":[null,200911,2,3,4,5,6,7,8,9,10,11],
+                                 "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]},
+                    "realizado":{"2009":[null,200912,2,3,4,5,6,7,8,9,10,11],
+                                 "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]}},
+              editForm: $('#hidden'),
+              validator: function(){}
+              });
+
+			$('#demos').anythingSlider({
+				width               : 700,   // if resizeContent is false, this is the default width if panel size is not defined
+				height              : 450,   // if resizeContent is false, this is the default height if panel size is not defined
+				resizeContents      : false, // If true, solitary images/objects in the panel will expand to fit the viewport
+				startStopped        : true,  // If autoPlay is on, this can force it to start stopped
+				navigationFormatter : function(index, panel){ // Format navigation labels with text
+					return ['Demo 1', 'Demo 2', 'Demo 3', 'Demo 4', 'Demo 5'][index - 1];
+				}
+			});
       });
 
     </script>
     <div id="container">
-    <h1>Simple demo within a specific year</h3>
-    <div id="grid1"></div>
+      <ul id="demos">
+        <li id="demo1">
+        <h1>Simple demo within a specific year</h3>
+        <div id="grid1"></div>
+                </li><li id="demo2">
     <h1>Simple demo with multiple years</h3>
     <div id="grid2"></div>
+            </li><li id="demo3">
     <h1>Simple demo with multiple years and edition</h3>
     <div id="grid3"></div>
+            </li><li id="demo4">
     <h1>Simple demo with multiple years, edition and validation</h3>
     <div id="grid4">Developing</div>
+            </li><li id="demo5">
     <h1>Simple demo with multiple years, edition, validation and a chart</h3>
     <div id="grid5">Developing</div>
-    <div id="hidden">boo</div>
+            </li>
   </div>
+</div>
+    <div id="hidden">boo</div>
   </body>
 </html>
