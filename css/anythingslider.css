@@ -115,7 +115,7 @@ div.anythingSlider .anythingControls { outline: 0; }
 div.anythingSlider .thumbNav { margin: 0; }
 div.anythingSlider .thumbNav li { display: inline; }
 div.anythingSlider .thumbNav a {
-	font: 11px/18px Georgia, Serif;
+	font: 11px/18px verdana, arial, helvetica;
 	display: inline-block;
 	text-decoration: none;
 	padding: 2px 8px;
