@@ -41,8 +41,7 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
       'editForm'            : $(''),
       'validator'           : function(){},
       'onStart'             : function(currentYear, settings){},
-      'onYearChange'        : function(newYear, data){},
-      'onCellChange'        : function(currentYear, data, rows){}
+      'onChange'            : function(currentYear, data, rows){}
     };
 
     var methods = {
@@ -184,7 +183,7 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
           $('#' + containerId + '_year_' + year).hide();
         };
       };
-      settings['onCellChange']($(this).attr('value'), settings['data']);
+      settings['onChange']($(this).attr('value'), settings['data'], settings['rows']);
     }
 
     function onCellClick(){
@@ -203,7 +202,7 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
       editForm.html(drawDialog(cellSplit, data, values, okButton, cancelButton));
 
       $('#' + cancelButton).click(function(){editForm.dialog('close')});
-      $('#' + okButton).click(function(){submitDialog(cellSplit)});
+      $('#' + okButton).click(function(){if(submitDialog(cellSplit)){settings['onChange']($('#' + containerId + '_select').attr('value'), settings['data'], settings['rows']);}});
 
       editForm.dialog('open');
     }
@@ -235,14 +234,13 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
       var dateSplit = $('#cell_date').attr('value').split('-');
       var cell = $('#' + containerId + '_cell_' + dateSplit[0] + '_' + dateSplit[1]);
       
-      console.log('----', dateSplit, settings['data'], cell);
       var cell_value = '';
       
       for(var i = 0; i < (fields.length - 1); i++){
         var field_id = $(fields[i]).attr('id');
         var field_value = $(fields[i]).attr('value');
 
-        settings['data'][field_id][dateSplit[0]][dateSplit[1]] = field_value;
+        settings['data'][field_id][dateSplit[0]][dateSplit[1]] = parseInt(field_value);
 
         cell_value += field_value + '<br/>';
       }
@@ -250,6 +248,8 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
       cell.html(cell_value);
       
       $(editForm).dialog('close');
+
+      return true;
     }
 
     // Method calling logic

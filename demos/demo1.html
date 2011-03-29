@@ -81,8 +81,7 @@
               editForm: $('#hidden'),
               validator: function(){},
               onStart: onGrid5Start,
-              onCellChange: onGrid5Change,
-              onYearChange: function(){}
+              onChange: onGrid5Change
           });
           
           $('#demos').anythingSlider({
@@ -138,8 +137,12 @@
             chart = new Highcharts.Chart(data);
           }
 
-          function onGrid5Change(currentYear, data){
-            console.log("onGrid5Change", currentYear, data, chart);
+          function onGrid5Change(currentYear, data, rows){
+            console.log("onGrid5Change", currentYear, data, rows);
+
+            for(var row = 0; row < rows.length; row++){
+              chart.series[row].setData(data[rows[row]['id']][currentYear]);
+            }
           }
       });
     </script>
