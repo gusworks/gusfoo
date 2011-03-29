@@ -5,13 +5,15 @@
     <script type="text/javascript" src="../js/jquery-ui-1.8.10.custom.min.js"></script>
     <script type="text/javascript" src="../js/jquery.gusfoo.js"></script>
     <script type="text/javascript" src="../js/jquery.anythingslider.min.js"></script> 
+    <script type="text/javascript" src="../js/highcharts.js"></script>
 
     <link href="../css/jquery-ui-1.8.10.custom.css" media="screen" rel="stylesheet" type="text/css"/>
     <link href="../css/anythingslider.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="../css/demo.css" media="screen" rel="stylesheet" type="text/css"/> 
   </head>
   <body>
-    <script type="text/javascript">
+  <script type="text/javascript">
+    var chart;
       $(function(){
           $('#grid1').gusfoo();
 
@@ -78,23 +80,75 @@
                                  "2011":[0,1,2,3,4,5,6,7,8,9,10,null]}},
               editForm: $('#hidden'),
               validator: function(){},
-              afterUpdate: function(){}
-              });
+              onStart: onGrid5Start,
+              onCellChange: onGrid5Change,
+              onYearChange: function(){}
+          });
           
-			$('#demos').anythingSlider({
-				width               : 700,   // if resizeContent is false, this is the default width if panel size is not defined
-				height              : 450,   // if resizeContent is false, this is the default height if panel size is not defined
-				resizeContents      : false, // If true, solitary images/objects in the panel will expand to fit the viewport
-				startStopped        : true,  // If autoPlay is on, this can force it to start stopped
-				navigationFormatter : function(index, panel){ // Format navigation labels with text
-					return ['Demo 1 - Simple', 'Demo 2 - Multiple years', 'Demo 3 - Edition', 'Demo 4 - Validation', 'Demo 5 - Chart'][index - 1];
-          },
-        enablePlay: false,
-        startText: 'Demos',
-        stopText: 'Parar'
-			});
-      });
+          $('#demos').anythingSlider({
+              width               : 700,   // if resizeContent is false, this is the default width if panel size is not defined
+              height              : 450,   // if resizeContent is false, this is the default height if panel size is not defined
+              resizeContents      : false, // If true, solitary images/objects in the panel will expand to fit the viewport
+              startStopped        : true,  // If autoPlay is on, this can force it to start stopped
+              navigationFormatter : function(index, panel){ // Format navigation labels with text
+                return ['Demo 1 - Simple', 'Demo 2 - Multiple years', 'Demo 3 - Edition', 'Demo 4 - Validation', 'Demo 5 - Chart'][index - 1];
+              },
+              enablePlay: false,
+              startText: 'Demos',
+              stopText: 'Parar'
+              });
 
+          function onGrid5Start(currentYear, settings){
+            console.log("onGrid5Start", currentYear, settings);
+            var data = {
+              chart: {
+               renderTo: 'chart',
+               defaultSeriesType: 'line',
+               marginBottom: 25
+            },
+            title: {text: null},
+            credits: {enabled: false},
+            xAxis: {
+               categories: []
+            },
+            yAxis: {title: {text: ''}},
+            legend: {
+              layout: 'vertical',
+              align: 'right',
+              verticalAlign: 'top',
+              x: -10,
+              y: 100,
+              borderWidth: 0
+            },
+            series: [{
+              name: 'Max',
+              data: [100, 105, 110, 108, 105, 103, 100, 111, 102, 110, 108, 106]
+            }, {
+          name: 'Min',
+          data: [100 * 0.8, 105 * 0.8, 110 * 0.8, 108 * 0.8, 105 * 0.8, 103 * 0.8, 100 * 0.8, 111 * 0.8, 102 * 0.8, 110 * 0.8, 108 * 0.8, 106 * 0.8]
+            }]};
+
+            data.series = [];
+
+            var shortMonths = settings['shortMonths'];
+            var rows = settings['rows'];
+
+            for(var pos = 0; pos < shortMonths.length; pos++){
+              data.xAxis.categories.push(shortMonths[pos]);
+            }
+
+            for(var pos = 0; pos < rows.length; pos++){
+              data.series.push({name: rows[pos]['title'], data: [pos]});
+            }
+
+            console.log(133, data, data.series, rows);
+            chart = new Highcharts.Chart(data);
+          }
+
+          function onGrid5Change(currentYear, data){
+            console.log("onGrid5Change", currentYear, data, chart);
+          }
+      });
     </script>
     <div id="container">
       <ul id="demos">
@@ -109,10 +163,11 @@
     <div id="grid3"></div>
             </li><li id="demo4">
     <h1>Simple demo with multiple years, edition and validation</h3>
-    <div id="grid4">Developing</div>
+    <div id="grid4"></div>
             </li><li id="demo5">
     <h1>Simple demo with multiple years, edition, validation and a chart</h3>
-    <div id="grid5">Developing</div>
+    <div id="grid5"></div>
+    <div id="chart" style="height: 350px;">Here comes a chart</div>
             </li>
   </div>
 </div>

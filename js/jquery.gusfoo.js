@@ -38,7 +38,11 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
                               }],
       'data'                : {"row1" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
                                "row2" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}},
-      'editForm'            : $('')
+      'editForm'            : $(''),
+      'validator'           : function(){},
+      'onStart'             : function(currentYear, settings){},
+      'onYearChange'        : function(newYear, data){},
+      'onCellChange'        : function(currentYear, data, rows){}
     };
 
     var methods = {
@@ -73,9 +77,11 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
 
         editForm.hide();
 
-        select.trigger('change');
-
         editForm.dialog({autoOpen: false});
+
+        settings['onStart'](select.attr('value'), settings);    
+
+        select.trigger('change');
 
         return $(this);
       },
@@ -178,6 +184,7 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
           $('#' + containerId + '_year_' + year).hide();
         };
       };
+      settings['onCellChange']($(this).attr('value'), settings['data']);
     }
 
     function onCellClick(){

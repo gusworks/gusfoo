@@ -59,6 +59,24 @@ body {
   border-color: #ff8f8f;
 }
 
+#grid3 {
+  background-color: #efffef;
+  border-color: #7fff7f;
+}
+
+#grid3 .gusfoo_soft_box {
+  border-color: #8fff8f;
+}
+
+#grid5 {
+  background-color: #fffafa;
+  border-color: #ff8fff;
+}
+
+#grid5 .gusfoo_soft_box {
+  border-color: #ff8fff;
+}
+
 .gusfoo th {
   font-weight: bold;
   font-size       : 13px;
