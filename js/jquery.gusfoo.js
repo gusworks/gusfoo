@@ -41,7 +41,9 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
       'editForm'            : $(''),
       'validator'           : function(){},
       'onStart'             : function(currentYear, data, rows){},
-      'onChange'            : function(currentYear, data, rows){}
+      'onChange'            : function(currentYear, data, rows){},
+			'toText'							: function(value){return value + '';},
+			'toNumber'						: function(value){return parseFloat(value)}
     };
 
     var methods = {
@@ -208,7 +210,6 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
     }
 
     function drawDialog(cellSplit, data, values, okButton, cancelButton){
-      console.log(cellSplit, data, values);
       var html = '';
       var fields = settings['rows'];
 
@@ -240,7 +241,7 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
         var field_id = $(fields[i]).attr('id');
         var field_value = $(fields[i]).attr('value');
 
-        settings['data'][field_id][dateSplit[0]][dateSplit[1]] = parseInt(field_value);
+        settings['data'][field_id][dateSplit[0]][dateSplit[1]] = settings['toNumber'](field_value);
 
         cell_value += field_value + '<br/>';
       }

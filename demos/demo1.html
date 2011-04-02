@@ -138,7 +138,11 @@
 
           function onGrid5Change(currentYear, data, rows){
             for(var row = 0; row < rows.length; row++){
-              chart.series[row].setData(data[rows[row]['id']][currentYear]);
+							var serie = data[rows[row]['id']][currentYear];
+							for(var col = 0; col < serie.length; col++){
+								chart.series[row].data[col].update(serie[col]);
+							}
+							// chart.series[row].setData(data[rows[row]['id']][currentYear]);
             }
           }
       });
