@@ -97,8 +97,8 @@
               stopText: 'Parar'
               });
 
-          function onGrid5Start(currentYear, settings){
-            var data = {
+          function onGrid5Start(currentYear, data, rows, monthNames){
+            var chartData = {
               chart: {
                renderTo: 'chart',
                defaultSeriesType: 'line',
@@ -120,26 +120,23 @@
             },
             series: []};
 
-            var shortMonths = settings['shortMonths'];
-            var rows = settings['rows'];
+            var shortMonths = monthNames;
 
             for(var pos = 0; pos < shortMonths.length; pos++){
-              data.xAxis.categories.push(shortMonths[pos]);
+              chartData.xAxis.categories.push(shortMonths[pos]);
             }
 
             for(var pos = 0; pos < rows.length; pos++){
-              data.series.push({name: rows[pos]['title'], data: []});
+              chartData.series.push({name: rows[pos]['title'], data: []});
               for(var row = 0; row < rows.length; row++){
-                data.series[pos].data = settings['data'][rows[row]['id']][currentYear];
+                chartData.series[pos].data = data[rows[row]['id']][currentYear];
               }
             }
 
-            chart = new Highcharts.Chart(data);
+            chart = new Highcharts.Chart(chartData);
           }
 
           function onGrid5Change(currentYear, data, rows){
-            console.log("onGrid5Change", currentYear, data, rows);
-
             for(var row = 0; row < rows.length; row++){
               chart.series[row].setData(data[rows[row]['id']][currentYear]);
             }
