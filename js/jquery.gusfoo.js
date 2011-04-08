@@ -1,5 +1,5 @@
 // damned IE
-if(typeof console=='undefined'){console=new function(){this.log=function(message){}}}
+// if(typeof console=='undefined'){console=new function(){this.log=function(message){}}}
 
 (function($){
   $.fn.gusfoo = function(method) {
@@ -38,7 +38,7 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
                               }],
       'data'                : {"row1" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
                                "row2" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}},
-      'editForm'            : $(''),
+      'editForm'            : null,
       'validator'           : function(){},
       'onStart'             : function(currentYear, data, rows){},
       'onChange'            : function(currentYear, data, rows){},
@@ -76,10 +76,10 @@ if(typeof console=='undefined'){console=new function(){this.log=function(message
 
         editForm = settings['editForm'];
 
-        editForm.hide();
-
-        editForm.dialog({autoOpen: false});
-
+        if(editForm != null){
+          editForm.hide();
+          editForm.dialog({autoOpen: false});
+        }
         settings['onStart'](select.attr('value'), settings['data'], settings['rows'], settings['shortMonths']);    
 
         select.trigger('change');
