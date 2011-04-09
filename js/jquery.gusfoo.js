@@ -38,12 +38,12 @@
                               }],
       'data'                : {"row1" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
                                "row2" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}},
-      'editForm'            : null,
+      'editForm'            : $('null').append('<div/>'),
       'validator'           : function(){},
       'onStart'             : function(currentYear, data, rows){},
       'onChange'            : function(currentYear, data, rows){},
-			'toText'							: function(value){return value + '';},
-			'toNumber'						: function(value){return parseFloat(value)}
+      'toText'							: function(value){return value + '';},
+      'toNumber'						: function(value){return parseFloat(value)}
     };
 
     var methods = {
@@ -51,6 +51,8 @@
         if(options){
           $.extend(settings, options);
         };
+
+        console.log(settings['data']);
 
         var startSplit = settings['startMonth'].split('-');
         var finalSplit = settings['finalMonth'].split('-');
@@ -76,10 +78,9 @@
 
         editForm = settings['editForm'];
 
-        if(editForm != null){
-          editForm.hide();
-          editForm.dialog({autoOpen: false});
-        }
+        editForm.hide();
+        editForm.dialog({autoOpen: false});
+
         settings['onStart'](select.attr('value'), settings['data'], settings['rows'], settings['shortMonths']);    
 
         select.trigger('change');
