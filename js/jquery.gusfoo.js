@@ -52,8 +52,6 @@
           $.extend(settings, options);
         };
 
-        console.log(settings['data']);
-
         var startSplit = settings['startMonth'].split('-');
         var finalSplit = settings['finalMonth'].split('-');
         
