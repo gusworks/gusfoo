@@ -1,1 +1,174 @@
-"My GitHub Page" 
+<html>
+  <head>
+    <title>jQuery Gusfoo plugin</title>
+    <script type="text/javascript" src="../js/jquery-1.5.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui-1.8.10.custom.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.gusfoo.js"></script>
+    <script type="text/javascript" src="../js/jquery.anythingslider.min.js"></script> 
+    <script type="text/javascript" src="../js/highcharts.js"></script>
+
+    <link href="../css/jquery-ui-1.8.10.custom.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="../css/anythingslider.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="../css/demo.css" media="screen" rel="stylesheet" type="text/css"/> 
+  </head>
+  <body>
+  <script type="text/javascript">
+    var chart;
+      $(function(){
+          $('#grid1').gusfoo();
+
+          $('#grid2').gusfoo({
+              startMonth: '2009-02',
+              finalMonth: '2012-11',
+              rows: [{'title': 'Estimado',
+                      'id'   : 'estimado'},
+                     {'title': 'Realizado',
+                     'id'   : 'realizado'}],
+              data:{"estimado": {"2009":[null,1,15,3,15,5,15,7,15,9,15,11],
+                                 "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]},
+                    "realizado":{"2009":[null,200912,2,3,4,5,6,7,8,9,10,11],
+                                 "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]}}
+                                 });
+
+          $('#grid3').gusfoo({
+              startMonth: '2009-02',
+              finalMonth: '2012-11',
+              rows: [{'title': 'Estimado',
+                      'id'   : 'estimado'},
+                     {'title': 'Realizado',
+                     'id'   : 'realizado'}],
+              data:{"estimado": {"2009":[null,200911,2,3,4,5,6,7,8,9,10,11],
+                                 "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]},
+                    "realizado":{"2009":[null,200912,2,3,4,5,6,7,8,9,10,11],
+                                 "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]}},
+              editForm: $('#hidden')
+              });
+
+          $('#grid4').gusfoo({
+              startMonth: '2009-02',
+              finalMonth: '2012-11',
+              rows: [{'title': 'Estimado',
+                      'id'   : 'estimado'},
+                     {'title': 'Realizado',
+                     'id'   : 'realizado'}],
+              data:{"estimado": {"2009":[null,200911,2,3,4,5,6,7,8,9,10,11],
+                                 "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]},
+                    "realizado":{"2009":[null,200912,2,3,4,5,6,7,8,9,10,11],
+                                 "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]}},
+              editForm: $('#hidden'),
+              validator: function(){}
+              });
+
+          $('#grid5').gusfoo({
+              startMonth: '2009-02',
+              finalMonth: '2012-11',
+              rows: [{'title': 'Estimado',
+                      'id'   : 'estimado'},
+                     {'title': 'Realizado',
+                     'id'   : 'realizado'}],
+              data:{"estimado": {"2009":[null,1,15,3,15,5,15,7,15,9,15,11],
+                                 "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]},
+                    "realizado":{"2009":[null,15,2,15,4,15,6,15,8,15,10,15],
+                                 "2010":[0,1,2,3,4,5,6,7,8,9,10,11],
+                                 "2011":[0,1,2,3,4,5,6,7,8,9,10,null]}},
+              editForm: $('#hidden'),
+              validator: function(){},
+              onStart: onGrid5Start,
+              onChange: onGrid5Change
+          });
+          
+          $('#demos').anythingSlider({
+              width               : 700,   // if resizeContent is false, this is the default width if panel size is not defined
+              height              : 450,   // if resizeContent is false, this is the default height if panel size is not defined
+              resizeContents      : false, // If true, solitary images/objects in the panel will expand to fit the viewport
+              startStopped        : true,  // If autoPlay is on, this can force it to start stopped
+              navigationFormatter : function(index, panel){ // Format navigation labels with text
+                return ['Demo 1 - Simple', 'Demo 2 - Multiple years', 'Demo 3 - Edition', 'Demo 4 - Validation', 'Demo 5 - Chart'][index - 1];
+              },
+              enablePlay: false,
+              startText: 'Demos',
+              stopText: 'Parar'
+          });
+
+          function onGrid5Start(currentYear, data, rows, monthNames){
+            var chartData = {
+              chart: {
+               renderTo: 'chart',
+               defaultSeriesType: 'line',
+               marginBottom: 25
+            },
+            title: {text: null},
+            credits: {enabled: false},
+            xAxis: {
+               categories: []
+            },
+            yAxis: {title: {text: ''}},
+            legend: {
+              layout: 'vertical',
+              align: 'right',
+              verticalAlign: 'top',
+              x: -10,
+              y: 100,
+              borderWidth: 0
+            },
+            series: []};
+
+            var shortMonths = monthNames;
+
+            for(var pos = 0; pos < shortMonths.length; pos++){
+              chartData.xAxis.categories.push(shortMonths[pos]);
+            }
+
+            for(var pos = 0; pos < rows.length; pos++){
+              chartData.series.push({name: rows[pos]['title'], data: []});
+              for(var row = 0; row < rows.length; row++){
+                chartData.series[pos].data = data[rows[row]['id']][currentYear];
+              }
+            }
+
+            chart = new Highcharts.Chart(chartData);
+          }
+
+          function onGrid5Change(currentYear, data, rows){
+            for(var row = 0; row < rows.length; row++){
+							var serie = data[rows[row]['id']][currentYear];
+							for(var col = 0; col < serie.length; col++){
+								if(chart.series[row].data[col].config != serie[col]){
+									chart.series[row].data[col].update(serie[col]);
+								}
+							}
+            }
+          }
+      });
+    </script>
+    <div id="container">
+      <ul id="demos">
+        <li id="demo1">
+        <h1>Simple demo within a specific year</h3>
+        <div id="grid1"></div>
+                </li><li id="demo2">
+    <h1>Simple demo with multiple years</h3>
+    <div id="grid2"></div>
+            </li><li id="demo3">
+    <h1>Simple demo with multiple years and edition</h3>
+    <div id="grid3"></div>
+            </li><li id="demo4">
+    <h1>Simple demo with multiple years, edition and validation</h3>
+    <div id="grid4"></div>
+            </li><li id="demo5">
+    <h1>Simple demo with multiple years, edition, validation and a chart</h3>
+    <div id="grid5"></div>
+    <div id="chart" style="height: 350px;">Here comes a chart</div>
+            </li>
+  </div>
+</div>
+    <div id="hidden">boo</div>
+  </body>
+</html>
