@@ -1,3 +1,11 @@
+en:
 Gusfoo is a jQuery plugin for create and set a dynamic, filterable and editable datagrid.
 
-.
+View demo in http://gusworks.github.com/gusfoo/
+
+pt-BR:
+Gusfoo é um plugin jQuery criado para resolver uma necessidade específica de um projeto em que eu estava trabalhando.
+
+Porém, como o componente pode ser, e possivelmente será, utilizado em outros projetos, decidi publicá-lo aqui, para quem tiver interesse em usar ou mesmo para que eu não perca os fontes em algum canto.
+
+Veja os demos em http://gusworks.github.com/gusfoo/
