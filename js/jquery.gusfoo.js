@@ -21,7 +21,7 @@
       'shortMonths'         : ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
       'fullMonths'          : ['Janeiro', 
                                 'Fevereiro', 
-                                'Março', 
+                                'Mar?o', 
                                 'Abril', 
                                 'Maio', 
                                 'Junho', 
@@ -31,10 +31,12 @@
                                 'Outubro', 
                                 'Novembro', 
                                 'Dezembro'],
-      'rows'                : [{'title': 'Row 1',
-                                'id'   : 'row1'
+      'rows'                : [{'title' : 'Row 1',
+                                'id'    : 'row1',
+                                'locked': 'false'
                               }, {'title': 'Row 2',
-                                'id'   : 'row2'
+                                'id'    : 'row2',
+                                'locked': 'false'
                               }],
       'data'                : {"row1" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
                                "row2" : {"2011": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}},
@@ -42,6 +44,8 @@
       'validator'           : function(){},
       'onStart'             : function(currentYear, data, rows){},
       'onChange'            : function(currentYear, data, rows){},
+      'onOpenDialog'        : function(){},
+      'onCloseDialog'       : function(event, ui){},
       'toText'							: function(value){return value + '';},
       'toNumber'						: function(value){return parseFloat(value)}
     };
@@ -201,11 +205,13 @@
 
       editForm.empty();
       editForm.html(drawDialog(cellSplit, data, values, okButton, cancelButton));
-
+ 
       $('#' + cancelButton).click(function(){editForm.dialog('close')});
       $('#' + okButton).click(function(){if(submitDialog(cellSplit)){settings['onChange']($('#' + containerId + '_select').attr('value'), settings['data'], settings['rows']);}});
 
-      editForm.dialog('open');
+      settings['onOpenDialog']();
+
+      editForm.dialog({close: settings['onCloseDialog']}).dialog('open');
     }
 
     function drawDialog(cellSplit, data, values, okButton, cancelButton){
@@ -216,11 +222,11 @@
         html += '<label for="' + fields[i]['id'] + '">' + fields[i]['title'] + ': </label>';
         html += '<input type="text" id="' + 
           fields[i]['id'] + 
-          '" class="' + 
-          fields[i]['class'] + 
+          '" class="' + (fields[i]['locked'] ? 'locked-field' : fields[i]['class']) + 
           '" value="' + 
           settings['data'][fields[i]['id']][cellSplit[2]][cellSplit[3]] + 
-          '">';
+          '" ' + (fields[i]['locked'] ? 'disabled' : '') +
+          ' size="10" maxlength="10">';
         html += '<br/>';
       }
       html += '<input type="hidden" id="cell_date" value="' + cellSplit[2] + '-' + cellSplit[3] + '">';
